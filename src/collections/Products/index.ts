@@ -1,7 +1,6 @@
 import { CollectionConfig } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { slugField } from '@/fields/slug'
 
 export const Products: CollectionConfig = {
@@ -9,12 +8,12 @@ export const Products: CollectionConfig = {
   access: {
     create: authenticated,
     delete: authenticated,
-    read: authenticatedOrPublished,
+    read: () => true,
     update: authenticated,
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['thumbnail', 'title', 'slug', 'price', 'updatedAt'],
+    defaultColumns: ['thumbnail', 'title', 'slug', 'price', 'categories', 'updatedAt'],
   },
   defaultPopulate: {
     title: true,
